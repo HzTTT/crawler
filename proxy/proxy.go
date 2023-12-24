@@ -14,7 +14,7 @@ type roundRobinSwitcher struct {
 	index     uint32
 }
 
-func (r *roundRobinSwitcher) GetProxy(pr *http.Request) (*url.URL, error) {
+func (r *roundRobinSwitcher) GetProxy(_ *http.Request) (*url.URL, error) {
 	index := atomic.AddUint32(&r.index, 1) - 1
 	u := r.proxyURLs[int(index)%len(r.proxyURLs)]
 	return u, nil
